@@ -22,7 +22,22 @@ A **production-ready, research-grade tool** for analyzing privacy policies of he
 [See full changelog](CHANGELOG.md) | [Quick Start Guide](QUICK_START_V2.md) | [All Features](ENHANCEMENTS_V2.md)
 
 ---
+## 📊 Sample Output
 
+**[📄 View Sample Analysis Report (PDF)](https://drive.google.com/file/d/1MolBhR7PAiTUBbcYn6Jlq60NftbOwlEJ/view?usp=sharing)**
+
+This comprehensive report demonstrates:
+- ✅ Privacy policy analysis of Teladoc (major telehealth provider)
+- ✅ Risk scoring across 8 categories (Data Collection, Third-Party Sharing, etc.)
+- ✅ HIPAA compliance assessment
+- ✅ Older adult readability evaluation
+- ✅ Interactive visualizations and charts
+- ✅ Identified red flags and positive practices
+- ✅ Research-ready quotable findings
+
+*Example analysis completed in 37 seconds using GPT-4*
+
+---
 ## 🚀 Quick Start
 
 ### Option 1: Automated Installation (Recommended)
