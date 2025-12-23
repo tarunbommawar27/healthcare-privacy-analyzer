@@ -1,0 +1,149 @@
+# Privacy Policy Analyzer Configuration
+
+# LLM Settings
+llm:
+  provider: "anthropic"  # Options: openai, anthropic, auto
+  model: "claude-sonnet-4-20250514"  # Primary model
+  fallback_model: "gpt-4-turbo-preview"  # Fallback if primary fails
+  temperature: 0.3
+  max_tokens: 6000
+  timeout: 120
+  enable_fallback: true  # Auto-fallback to alternate provider on failure
+
+# Scraping Settings
+scraping:
+  timeout: 30
+  user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+  max_retries: 3
+  delay_between_requests: 2
+  use_headless: true
+  wait_for_load: 5
+
+# Analysis Parameters
+analysis:
+  # Analysis depth modes
+  depth_modes:
+    quick:
+      description: "Fast analysis focusing on critical issues"
+      max_tokens: 3000
+      detail_level: "high-level"
+    standard:
+      description: "Comprehensive analysis (recommended)"
+      max_tokens: 6000
+      detail_level: "detailed"
+    deep:
+      description: "In-depth analysis with chain-of-thought reasoning"
+      max_tokens: 12000
+      detail_level: "very-detailed"
+
+  # Default depth
+  default_depth: "standard"
+
+  # Caching settings
+  cache_enabled: true
+  cache_duration_days: 30
+
+  red_flags:
+    - "third-party sharing"
+    - "data sale"
+    - "sells user data"
+    - "advertising partners"
+    - "indefinite retention"
+    - "no encryption"
+    - "location tracking"
+    - "biometric data"
+    - "health information sharing"
+    - "shares with insurance"
+    - "no opt-out"
+    - "automatic consent"
+    - "pre-checked boxes"
+    - "unclear data usage"
+    - "cross-border transfer"
+    - "vague language"
+    - "missing retention period"
+
+  healthcare_specific:
+    - "HIPAA compliance"
+    - "PHI protection"
+    - "Protected Health Information"
+    - "medical data"
+    - "health records"
+    - "telehealth privacy"
+    - "prescription data"
+    - "diagnostic information"
+    - "Business Associate Agreement"
+    - "HITECH"
+    - "minimum necessary"
+
+  categories:
+    - "Data Collection"
+    - "Data Usage"
+    - "Third-Party Sharing"
+    - "Data Retention"
+    - "User Rights"
+    - "Security Measures"
+    - "Healthcare Compliance"
+    - "Older Adult Considerations"
+
+# Scoring Configuration
+scoring:
+  weights:
+    data_collection: 0.15
+    data_usage: 0.15
+    third_party_sharing: 0.20
+    data_retention: 0.15
+    user_rights: 0.10
+    security_measures: 0.15
+    healthcare_compliance: 0.10
+
+  risk_thresholds:
+    low: 0.3
+    medium: 0.6
+    high: 0.8
+
+# Output Settings
+output:
+  report_format: ["html", "pdf", "json"]
+  include_visualizations: true
+  save_raw_data: true
+  summary_length: 500  # words
+
+# Target Apps/Websites
+targets:
+  - name: "Example Telehealth App"
+    url: "https://example.com/privacy"
+    category: "telehealth"
+
+  - name: "Example Health Tracker"
+    url: "https://example.com/privacy-policy"
+    category: "health_tracker"
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "logs/analyzer.log"
+  rotation: "10 MB"
+  retention: "30 days"
+
+# File Paths
+paths:
+  raw_data: "data/raw"
+  processed_data: "data/processed"
+  reports: "outputs/reports"
+  visualizations: "outputs/visualizations"
+  logs: "logs"
+  cache: "data/cache"
+
+# Cost estimation (USD per 1K tokens, approximate)
+cost_estimation:
+  enabled: true
+  pricing:
+    claude-sonnet-4-20250514:
+      input: 0.003
+      output: 0.015
+    gpt-4-turbo-preview:
+      input: 0.01
+      output: 0.03
+    gpt-3.5-turbo:
+      input: 0.0005
+      output: 0.0015

@@ -1,0 +1,109 @@
+# Docker Compose for Privacy Policy Analyzer
+# Orchestrates the complete research environment
+
+version: '3.8'
+
+services:
+  # Main analyzer service
+  analyzer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: privacy-policy-analyzer:latest
+    container_name: privacy-analyzer
+
+    # Environment variables
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PYTHONUNBUFFERED=1
+
+    # Mount volumes for data persistence
+    volumes:
+      # Configuration
+      - ./config:/app/config:ro
+      - ./.env:/app/.env:ro
+
+      # Data directories (persistent)
+      - analyzer-cache:/app/data/cache
+      - analyzer-raw:/app/data/raw_policies
+
+      # Output directories (persistent)
+      - ./outputs:/app/outputs
+      - ./research_output:/app/research_output
+
+      # Logs
+      - ./logs:/app/logs
+
+      # Optional: Mount CSV inputs
+      - ./data:/app/data
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
+
+    # Restart policy
+    restart: unless-stopped
+
+    # Network
+    networks:
+      - analyzer-network
+
+    # Override default command (example)
+    # command: python main.py --analyze-all --depth standard
+
+  # Optional: Jupyter notebook for interactive analysis
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: privacy-policy-analyzer:latest
+    container_name: privacy-analyzer-jupyter
+
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - JUPYTER_ENABLE_LAB=yes
+
+    volumes:
+      - ./config:/app/config:ro
+      - ./.env:/app/.env:ro
+      - analyzer-cache:/app/data/cache
+      - ./outputs:/app/outputs
+      - ./research_output:/app/research_output
+      - ./notebooks:/app/notebooks
+
+    ports:
+      - "8888:8888"
+
+    command: >
+      bash -c "
+        pip install jupyter jupyterlab &&
+        jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+      "
+
+    networks:
+      - analyzer-network
+
+    restart: unless-stopped
+
+    profiles:
+      - jupyter
+
+# Named volumes for persistence
+volumes:
+  analyzer-cache:
+    driver: local
+  analyzer-raw:
+    driver: local
+
+# Network
+networks:
+  analyzer-network:
+    driver: bridge

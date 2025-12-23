@@ -1,0 +1,68 @@
+# CITATION.cff - Citation File Format
+# Use this file to cite the Privacy Policy Analyzer in your research
+
+cff-version: 1.2.0
+message: "If you use this software in your research, please cite it as below."
+type: software
+title: "Privacy Policy Analyzer for Healthcare Apps"
+version: 2.0.0
+date-released: 2025-01-15
+repository-code: "https://github.com/yourusername/privacy-policy-analyzer"
+license: MIT
+
+authors:
+  - family-names: "Your"
+    given-names: "Name"
+    email: "your.email@example.com"
+    affiliation: "Your Institution"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+
+abstract: >-
+  A research-grade privacy policy analysis tool specifically designed for
+  healthcare applications. Combines advanced Large Language Model (LLM)
+  analysis, statistical methods, and comprehensive validation to provide
+  publication-quality insights into privacy policies. Features multi-model
+  support (Claude Sonnet 4, GPT-4), three analysis depths including
+  chain-of-thought reasoning, comparative statistical analysis, anomaly
+  detection, and complete research workflow automation. Includes quality
+  validation, intelligent caching, and production-ready Docker deployment.
+  Designed for academic research in healthcare privacy, HIPAA compliance,
+  and digital health policy analysis.
+
+keywords:
+  - privacy policy analysis
+  - healthcare privacy
+  - HIPAA compliance
+  - LLM analysis
+  - digital health
+  - privacy research
+  - natural language processing
+  - policy analysis
+  - comparative analysis
+  - healthcare applications
+
+# Preferred citation
+preferred-citation:
+  type: software
+  title: "Privacy Policy Analyzer for Healthcare Apps"
+  authors:
+    - family-names: "Your"
+      given-names: "Name"
+  year: 2025
+  version: 2.0.0
+  url: "https://github.com/yourusername/privacy-policy-analyzer"
+
+# Optional: Related publications
+# references:
+#   - type: article
+#     title: "Analyzing Privacy Policies of Healthcare Mobile Applications"
+#     authors:
+#       - family-names: "Your"
+#         given-names: "Name"
+#     year: 2025
+#     journal: "Journal of Health Informatics"
+#     volume: 1
+#     issue: 1
+#     start: 1
+#     end: 20
+#     doi: "10.1234/jhi.2025.001"
